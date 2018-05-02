@@ -1,5 +1,6 @@
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 
 public class Proj2 {
 	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
@@ -29,7 +30,13 @@ public class Proj2 {
 		Cipher cipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding"); 
 		String out = null;
 		
-		
+		String secret = message;
+		cipher.init(Cipher.ENCRYPT_MODE, keySpec, new javax.crypto.spec.IvParameterSpec(IV.getBytes())); 
+		byte[] encoding = cipher.doFinal(secret.getBytes());
+
+		System.out.println("-- Encrypted -----------");
+		System.out.println("Base64:\t " + DatatypeConverter.printBase64Binary(encoding));
+		System.out.println("HEX:\t " + bytesToHex(encoding));
 	}
 	
 	public static void decrypt(String keyStr, String ivStr, String message) 
@@ -47,11 +54,26 @@ public class Proj2 {
 		Cipher cipher = Cipher.getInstance("Blowfish/CBC/PKCS5Padding"); 
 		String out = null;
 		
+		// Decode Base64
+		byte[] ciphertext = DatatypeConverter.parseBase64Binary(message);
+
+		// Decrypt 
+		cipher.init(Cipher.DECRYPT_MODE, keySpec, new javax.crypto.spec.IvParameterSpec(IV.getBytes()));
+		byte[] finalMessage = cipher.doFinal(ciphertext);
+
+		System.out.println("-- Decrypted -----------");
+		System.out.println("HEX:\t " + bytesToHex(finalMessage));
+		System.out.println("PLAIN:\t " + new String(finalMessage));
 		
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws Exception {
+		
+		// SecretKe must be 8 chars long!!!
+		
+		encrypt("Public Key", "SecretKe", "this is the  unecrypted message here");
+		
+		decrypt("Public Key", "SecretKe", "this is the ENCRYPTED message here");
 
 	}
 
