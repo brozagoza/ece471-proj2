@@ -19,6 +19,7 @@ public class server {
 		String input = "";
 		char action = ' ';
 		
+		System.out.println();
 		initMessage();
 		while(scanner.hasNextLine())
 		{
@@ -79,7 +80,7 @@ public class server {
 					
 				}
 			}
-			
+			System.out.println();
 			initMessage();	
 		}
 		
