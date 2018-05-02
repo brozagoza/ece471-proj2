@@ -14,9 +14,10 @@ public class server {
 		String input = "";
 		char action = ' ';
 		
+		initMessage();
 		while(scanner.hasNextLine())
 		{
-			initMessage();
+			
 			input = scanner.nextLine();
 			
 			
@@ -75,13 +76,14 @@ public class server {
 				}
 			}
 			
-			
+			initMessage();	
 		}
 		
 	}
 	
 	public boolean checkUsername(String name)
 	{
+		//TODO check for the user name
 		return true;
 	}
 	

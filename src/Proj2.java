@@ -71,9 +71,13 @@ public class Proj2 {
 		
 		// SecretKe must be 8 chars long!!!
 		
-		encrypt("Public Key", "SecretKe", "this is the  unecrypted message here");
+		server Server = new server();
+		Server.run();
 		
-		decrypt("Public Key", "SecretKe", "this is the ENCRYPTED message here");
+		
+//		encrypt("Public Key", "SecretKe", "this is the  unecrypted message here");
+//		
+//		decrypt("Public Key", "SecretKe", "this is the ENCRYPTED message here");
 
 	}
 
